@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
   standalone: true,
   selector: 'app-register',
   imports: [CommonModule, FormsModule, RouterModule],
+  styleUrls: ['./register.component.css'],
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
@@ -16,7 +17,7 @@ export class RegisterComponent {
   email = '';
   password = '';
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router) { }
 
   register() {
     this.auth.register(this.name, this.email, this.password).subscribe({

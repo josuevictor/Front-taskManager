@@ -7,6 +7,7 @@ import { TaskService } from '../../services/task.service';
   standalone: true,
   selector: 'app-task-list',
   imports: [CommonModule, RouterModule],
+  styleUrls: ['./task-list.component.css'],
   templateUrl: './task-list.component.html'
 })
 export class TaskListComponent implements OnInit {

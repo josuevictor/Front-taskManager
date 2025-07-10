@@ -8,28 +8,26 @@ import { TaskService } from '../../services/task.service';
   standalone: true,
   selector: 'app-task-form',
   imports: [CommonModule, FormsModule],
-  template: `
-    <h2>Nova Tarefa</h2>
-    <form (ngSubmit)="save()">
-      <input [(ngModel)]="title" name="title" placeholder="Título" required>
-      <textarea [(ngModel)]="description" name="description" placeholder="Descrição"></textarea>
-      <button type="submit">Salvar</button>
-    </form>
-  `
+  styleUrls: ['./task-form.component.css'],
+  templateUrl: './task-form.component.html'
 })
 export class TaskFormComponent {
   title = '';
   description = '';
+  due_date = ''; 
 
-  constructor(
-    private taskService: TaskService,
-    private router: Router
-  ) {}
+  constructor(private taskService: TaskService, private router: Router) {}
 
   save() {
-    this.taskService.createTask(this.title, this.description).subscribe({
+    const data = {
+      title: this.title,
+      description: this.description,
+      due_date: this.due_date
+    };
+
+    this.taskService.createTask(data).subscribe({
       next: () => this.router.navigate(['/tasks']),
-      error: (err: any) => alert('Erro ao salvar tarefa')
+      error: () => alert('Erro ao salvar tarefa')
     });
   }
 }

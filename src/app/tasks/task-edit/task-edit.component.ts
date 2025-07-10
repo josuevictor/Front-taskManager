@@ -2,24 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { TaskService } from '../../services/task.service'; // ajuste o caminho se necessário
+import { TaskService } from '../../services/task.service';
 
 @Component({
   standalone: true,
   selector: 'app-task-edit',
   imports: [CommonModule, FormsModule],
-  template: `
-    <h2>Editar Tarefa</h2>
-    <form (ngSubmit)="update()">
-      <input [(ngModel)]="title" name="title" placeholder="Título" required>
-      <textarea [(ngModel)]="description" name="description" placeholder="Descrição"></textarea>
-      <button type="submit">Atualizar</button>
-    </form>
-  `
+  styleUrls: ['./task-edit.component.css'],
+  templateUrl: './task-edit.component.html'
 })
 export class TaskEditComponent implements OnInit {
   title = '';
   description = '';
+  due_date = ''; // nova propriedade
   id!: number;
 
   constructor(
@@ -34,6 +29,7 @@ export class TaskEditComponent implements OnInit {
       next: (task) => {
         this.title = task.title;
         this.description = task.description;
+        this.due_date = task.due_date; // ← carrega a data
       },
       error: () => alert('Erro ao carregar tarefa')
     });
@@ -42,7 +38,8 @@ export class TaskEditComponent implements OnInit {
   update() {
     const updated = {
       title: this.title,
-      description: this.description
+      description: this.description,
+      due_date: this.due_date // ← envia a data
     };
 
     this.taskService.updateTask(this.id, updated).subscribe({

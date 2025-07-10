@@ -10,8 +10,8 @@ export class TaskService {
 
   constructor(private http: HttpClient) {}
 
-  createTask(title: string, description: string = ''): Observable<any> {
-    return this.http.post(`${this.baseUrl}/tasks`, { title, description });
+  createTask(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/tasks`, data);
   }
 
   getAllTasks(): Observable<any[]> {

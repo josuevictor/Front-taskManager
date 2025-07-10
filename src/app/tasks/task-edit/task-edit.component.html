@@ -1,1 +1,29 @@
-<p>task-edit works!</p>
+<h2 class="form-title">Editar Tarefa</h2>
+
+<form (ngSubmit)="update()" class="form-container">
+  <input
+    [(ngModel)]="title"
+    name="title"
+    placeholder="Título"
+    required
+    class="form-input"
+  />
+
+  <textarea
+    [(ngModel)]="description"
+    name="description"
+    placeholder="Descrição"
+    class="form-textarea"
+  ></textarea>
+
+  <input
+    type="date"
+    [(ngModel)]="due_date"
+    name="due_date"
+    required
+    class="form-input"
+  />
+
+  <button type="submit" class="form-button">Atualizar</button>
+</form>
+
